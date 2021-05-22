@@ -2,15 +2,14 @@ import React, { Component } from "react";
 
 class Counter extends Component {
   state = {
-    count: 0,
-    tags: ["tag1", "tag2", "tag3"]
+    count: 0
   };
 
-  handleIncrement()
+  handleIncrement = () =>
   {
-    console.log("Increment called");
+    this.setState({ count: this.state.count + 1 });
   }
-
+  
   render() {
     return (
       <React.Fragment>
