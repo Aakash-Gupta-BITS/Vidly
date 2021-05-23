@@ -1,13 +1,21 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
+import Like from "./like";
 
 class Movies extends Component {
   state = {
     movies: getMovies(),
   };
 
-  deleteMovie(id) {
+  deleteMovie = (id) => {
     this.setState({ movies: this.state.movies.filter((m) => m._id !== id) });
+  }
+
+  likeClickHandler = (id) => {
+    const movie = this.state.movies.find(m => m._id === id);
+    console.log(movie);
+    movie.liked = !movie.liked;
+    this.setState({movies: this.state.movies.map(m => m)});
   }
 
   render() {
@@ -25,15 +33,19 @@ class Movies extends Component {
               <th>Stock</th>
               <th>Rate</th>
               <th />
+              <th />
             </tr>
           </thead>
           <tbody>
             {this.state.movies.map((m) => (
-              <tr>
+              <tr key={m._id}>
                 <td>{m.title}</td>
                 <td>{m.genre.name}</td>
                 <td>{m.numberInStock}</td>
                 <td>{m.dailyRentalRate}</td>
+                <td>
+                  <Like Liked={m.liked} onClick={() => this.likeClickHandler(m._id)}/>
+                </td>
                 <td>
                   <button
                     className="btn btn-danger btn-sm"
