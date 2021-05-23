@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Like = ({ liked, onClick}) => {
 
@@ -9,5 +10,10 @@ const Like = ({ liked, onClick}) => {
         <i className={className} aria-hidden="true" onClick={onClick} style={{cursor:'pointer'}}/>
      );
 }
- 
+
+Like.PropTypes = {
+    liked: PropTypes.bool.isRequired,
+    onClick: PropTypes.func.isRequired
+};
+
 export default Like;
