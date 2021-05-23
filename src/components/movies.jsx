@@ -34,7 +34,7 @@ class Movies extends Component {
     if (count === 0) return <p>There are no movies in the databse</p>;
     return (
       <div className="container">
-        <p>Showing {count} in the database.</p>
+        <p>Showing {currentMovies.length} in the database.</p>
         <table className="table">
           <thead>
             <tr>
