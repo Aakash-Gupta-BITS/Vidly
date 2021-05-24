@@ -1,10 +1,17 @@
 import React from "react";
 
-const GroupList = ({ groupList, groupID }) => {
+const GroupList = ({ groupList, group, onGroupClick }) => {
   return (
     <div className="list-group">
       {groupList.map((g) => (
-         <a key={g._id} href="#GroupList" className={!g._id && groupID === g._id ? "list-group-item active" : "list-group-item"}>{g.name}</a>
+        <a
+          key={g._id ? g._id : -1}
+          href="#GroupList"
+          className={g === group ? "list-group-item active" : "list-group-item"}
+          onClick={() => onGroupClick(g)}
+        >
+          {g.name}
+        </a>
       ))}
     </div>
   );

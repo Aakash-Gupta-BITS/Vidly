@@ -11,11 +11,13 @@ class Movies extends Component {
     genres: [],
     pageSize: 4,
     currentPage: 1,
-    currentGroupId: undefined,
+    currentGroup: undefined,
   };
 
   componentDidMount(props) {
-    this.setState({ movies: getMovies(), genres: getGenres() });
+    const genres = [{ name: "All Genres" }, ...getGenres()];
+    const currentGroup = genres[0];
+    this.setState({ movies: getMovies(), genres, currentGroup });
   }
 
   deleteMovie = (id) => {
@@ -33,19 +35,26 @@ class Movies extends Component {
     this.setState({ currentPage: pageNumber });
   };
 
-  handleGroupClick = (id) => {};
+  handleGroupClick = (group) => {
+    this.setState({ currentGroup: group, currentPage: 1 });
+  };
 
   render() {
-    const { length: count } = this.state.movies;
     const {
       movies: allMovies,
       pageSize,
       currentPage,
       genres: allGenres,
-      currentGroupId,
+      currentGroup,
     } = this.state;
 
-    let currentMovies = allMovies.slice(
+    //   console.log(currentGroupId);
+    const groupMovies = allMovies.filter((m) =>
+      !currentGroup || !currentGroup._id ? m : m.genre._id === currentGroup._id
+    );
+
+    const { length: count } = groupMovies;
+    let currentMovies = groupMovies.slice(
       (currentPage - 1) * pageSize,
       currentPage * pageSize
     );
@@ -55,14 +64,14 @@ class Movies extends Component {
       <div className="container">
         <div className="row">
           <div className="col">
-            <p>Showing {allMovies.length} in the database.</p>
+            <p>Showing {groupMovies.length} in the database.</p>
           </div>
         </div>
         <div className="row">
           <div className="col-sm-2">
             <GroupList
               groupList={allGenres}
-              groupID={currentGroupId}
+              group={currentGroup}
               onGroupClick={this.handleGroupClick}
             />
           </div>
