@@ -1,15 +1,21 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
+import {getGenres} from "../services/fakeGenreService";
 import Like from "./common/like";
 import Pagination from "./common/pagination";
 import GroupList from "./common/groupList"
 
 class Movies extends Component {
   state = {
-    movies: getMovies(),
+    movies: [],
+    genres: [],
     pageSize: 4,
     currentPage: 1,
   };
+
+  componentDidMount(props) {
+    this.setState({movies: getMovies(), genres: getGenres()});
+  }
 
   deleteMovie = (id) => {
     this.setState({ movies: this.state.movies.filter((m) => m._id !== id) });
@@ -44,7 +50,6 @@ class Movies extends Component {
         <div className="row">
           <div className="col-sm-1">
             <GroupList/>
-
           </div>
           <div className="col-sm">
             <table className="table">
