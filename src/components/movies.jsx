@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
-import {getGenres} from "../services/fakeGenreService";
+import { getGenres } from "../services/fakeGenreService";
 import Like from "./common/like";
 import Pagination from "./common/pagination";
-import GroupList from "./common/groupList"
+import GroupList from "./common/groupList";
 
 class Movies extends Component {
   state = {
@@ -11,10 +11,11 @@ class Movies extends Component {
     genres: [],
     pageSize: 4,
     currentPage: 1,
+    currentGroupId: undefined,
   };
 
   componentDidMount(props) {
-    this.setState({movies: getMovies(), genres: getGenres()});
+    this.setState({ movies: getMovies(), genres: getGenres() });
   }
 
   deleteMovie = (id) => {
@@ -32,9 +33,17 @@ class Movies extends Component {
     this.setState({ currentPage: pageNumber });
   };
 
+  handleGroupClick = (id) => {};
+
   render() {
     const { length: count } = this.state.movies;
-    const { movies: allMovies, pageSize, currentPage } = this.state;
+    const {
+      movies: allMovies,
+      pageSize,
+      currentPage,
+      genres: allGenres,
+      currentGroupId,
+    } = this.state;
 
     let currentMovies = allMovies.slice(
       (currentPage - 1) * pageSize,
@@ -45,11 +54,17 @@ class Movies extends Component {
     return (
       <div className="container">
         <div className="row">
-          <p>Showing {allMovies.length} in the database.</p>
+          <div className="col">
+            <p>Showing {allMovies.length} in the database.</p>
+          </div>
         </div>
         <div className="row">
-          <div className="col-sm-1">
-            <GroupList/>
+          <div className="col-sm-2">
+            <GroupList
+              groupList={allGenres}
+              groupID={currentGroupId}
+              onGroupClick={this.handleGroupClick}
+            />
           </div>
           <div className="col-sm">
             <table className="table">
