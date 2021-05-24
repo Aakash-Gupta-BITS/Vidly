@@ -11,7 +11,7 @@ const Like = ({ liked, onClick}) => {
      );
 }
 
-Like.PropTypes = {
+Like.propTypes = {
     liked: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired
 };

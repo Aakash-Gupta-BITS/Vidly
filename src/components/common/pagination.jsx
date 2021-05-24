@@ -7,6 +7,9 @@ const Pagination = ({ pageSize, itemsCount, currentPage, onPageClick } ) => {
     (i) => i + 1
   );
 
+  if (pageNumbers.length === 1)
+    return null;
+
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination">
@@ -15,7 +18,7 @@ const Pagination = ({ pageSize, itemsCount, currentPage, onPageClick } ) => {
             key={page}
             className={page === currentPage ? "page-item active" : "page-item"}
           >
-            <a className="page-link" href="#cap" onClick={() => onPageClick(page)}>{page}</a>
+            <a className="page-link" href="#Pagination" onClick={() => onPageClick(page)}>{page}</a>
           </li>
         ))}
       </ul>
@@ -24,9 +27,9 @@ const Pagination = ({ pageSize, itemsCount, currentPage, onPageClick } ) => {
 };
 
 Pagination.propTypes = {
-  pageSize = PropTypes.number.isRequired,
-  itemsCount = PropTypes.number.isRequired,
-  currentPage = PropTypes.number.isRequired,
-  onPageClick = PropTypes.func.isRequired
+  pageSize: PropTypes.number.isRequired,
+  itemsCount: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  onPageClick: PropTypes.func.isRequired
 };
 export default Pagination;
