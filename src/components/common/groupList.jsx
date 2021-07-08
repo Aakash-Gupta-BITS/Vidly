@@ -4,14 +4,15 @@ const GroupList = ({ groupList, group, onGroupClick }) => {
   return (
     <div className="list-group">
       {groupList.map((g) => (
-        <a
+        <li
           key={g._id ? g._id : -1}
           href="#GroupList"
           className={g === group ? "list-group-item active" : "list-group-item"}
           onClick={() => onGroupClick(g)}
+          style={{cursor:'pointer'}}
         >
           {g.name}
-        </a>
+        </li>
       ))}
     </div>
   );
