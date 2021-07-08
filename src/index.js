@@ -3,5 +3,6 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
+import Questions from "./components/Questions";
 
-ReactDOM.render(<div />, document.getElementById("root"));
+ReactDOM.render(<Questions />, document.getElementById("root"));

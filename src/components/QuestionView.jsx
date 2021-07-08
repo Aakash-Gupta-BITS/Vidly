@@ -1,8 +1,14 @@
 import Done from "./common/Done";
 
-const QuestionView = ({ questions, onDoneClick }) => {
+const QuestionView = ({ List, onDoneClick }) => {
+  const badgeClass = (difficulty) => {
+    if (difficulty === "Easy") return "badge badge-primary";
+    if (difficulty === "Medium") return "badge badge-warning";
+    return "badge badge-danger";
+  };
+
   return (
-    <table className="table">
+    <table className="table table-striped ">
       <thead>
         <tr>
           <th>ID</th>
@@ -13,14 +19,20 @@ const QuestionView = ({ questions, onDoneClick }) => {
         </tr>
       </thead>
       <tbody>
-        {questions.map((q) => (
+        {List.map((q) => (
           <tr key={q.id}>
             <td>{q.id}</td>
-            <td>{q.title}</td>
-            <td>{q.accuracy}</td>
-            <td>{q.difficulty}</td>
             <td>
-              <Done isDone={false} onClick={() => onClick()} />
+              <a href={q.link} target="none">
+                {q.title}
+              </a>
+            </td>
+            <td>{q.accuracy}</td>
+            <td>
+              <span class={badgeClass(q.difficulty)}>{q.difficulty}</span>
+            </td>
+            <td>
+              <Done isDone={false} onClick={() => onDoneClick()} />
             </td>
           </tr>
         ))}
