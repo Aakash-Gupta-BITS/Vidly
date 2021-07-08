@@ -5,4 +5,17 @@ import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
 import Questions from "./components/Questions";
 
-ReactDOM.render(<Questions />, document.getElementById("root"));
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+
+const theme = extendTheme({
+  config: {
+    useSystemColorMode: true,
+    initialColorMode: "dark",
+  },
+});
+ReactDOM.render(
+  <ChakraProvider theme={theme}>
+    <Questions />
+  </ChakraProvider>,
+  document.getElementById("root")
+);
