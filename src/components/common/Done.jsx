@@ -1,15 +1,8 @@
+import { CheckIcon, SmallCloseIcon } from "@chakra-ui/icons";
 const Done = ({ isDone, onClick }) => {
-  let classes = "fa fa-";
-  if (isDone) classes += "check .text-success";
-  else classes += "times .text-danger";
-  return (
-    <i
-      style={{ cursor: "pointer", color: isDone ? "green" : "red" }}
-      className={classes}
-      aria-hidden="true"
-      onClick={onClick}
-    />
-  );
+  if (isDone)
+    return <CheckIcon onClick={() => onClick(false)} color="green.900" />;
+  return <SmallCloseIcon onClick={() => onClick(true)} color="light.800" />;
 };
 
 export default Done;
