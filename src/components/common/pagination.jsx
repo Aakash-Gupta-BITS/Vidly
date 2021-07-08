@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Pagination = ({ pageSize, itemsCount, currentPage, onPageClick }) => {
-  
   const pageNumbers = [...Array(Math.ceil(itemsCount / pageSize)).keys()].map(
     (i) => i + 1
   );

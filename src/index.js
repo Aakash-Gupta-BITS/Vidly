@@ -1,11 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
 import "bootstrap/dist/css/bootstrap.css";
-import "font-awesome/css/font-awesome.css"
-import Movies from './components/movies';
+import "font-awesome/css/font-awesome.css";
 
-ReactDOM.render(
-  <Movies/>,
-  document.getElementById('root')
-);
+ReactDOM.render(<div />, document.getElementById("root"));
